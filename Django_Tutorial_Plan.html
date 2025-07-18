@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Django 24-Day Course Plan</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #ecf0f3;
+            margin: 0;
+            padding: 30px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px #aaa;
+        }
+
+        .table-container {
+            max-width: 1000px;
+            margin: auto;
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #3498db;
+            color: white;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr {
+            transition: background-color 0.4s ease, transform 0.2s ease;
+        }
+
+        tr:hover {
+            background-color: #f0f8ff;
+            transform: scale(1.01);
+        }
+
+        .completed {
+            background-color: #d4edda !important;
+            box-shadow: inset 0 0 5px #28a74566;
+            transition: background-color 0.4s ease;
+        }
+
+        .checkbox {
+            transform: scale(1.3);
+            cursor: pointer;
+            accent-color: #28a745;
+            transition: transform 0.2s ease;
+        }
+
+        .checkbox:hover {
+            transform: scale(1.5);
+        }
+
+        /* Mobile View */
+        @media screen and (max-width: 768px) {
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            tr {
+                background: #fff;
+                margin-bottom: 15px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            }
+
+            th {
+                display: none;
+            }
+
+            td {
+                padding: 10px 15px;
+                position: relative;
+            }
+
+            td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: #555;
+                display: block;
+                margin-bottom: 6px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Django 24-Day Course Plan</h1>
+
+    <div class="table-container">
+        <table id="courseTable">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Topic</th>
+                    <th>Completed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <script>
+                    const topics = [
+                        "Introduction to Django and Web Development",
+                        "Setting up Django Project & Environment",
+                        "Creating Apps and Project Structure",
+                        "URL Dispatcher and Views",
+                        "Templates and Static Files",
+                        "Working with Models and Databases",
+                        "Django Admin Panel",
+                        "CRUD Operations: Create",
+                        "CRUD Operations: Read",
+                        "CRUD Operations: Update",
+                        "CRUD Operations: Delete",
+                        "Form Handling and Validation",
+                        "User Registration",
+                        "User Login and Logout",
+                        "Session and Authentication",
+                        "Restricting Views (Login Required)",
+                        "Class-Based Views Introduction",
+                        "Class-Based Views for CRUD",
+                        "Styling with Bootstrap",
+                        "Template Inheritance and Context",
+                        "Project Setup: Mini Project",
+                        "Building the Mini Project: Phase 1",
+                        "Building the Mini Project: Phase 2",
+                        "Testing, Debugging & Final Touches"
+                    ];
+
+                    for (let i = 0; i < topics.length; i++) {
+                        document.write(`
+              <tr>
+                <td data-label="Day">Day ${i + 1}</td>
+                <td data-label="Topic">${topics[i]}</td>
+                <td data-label="Completed"><input type="checkbox" class="checkbox" data-index="${i}"></td>
+              </tr>
+            `);
+                    }
+                </script>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const checkboxes = document.querySelectorAll(".checkbox");
+
+            checkboxes.forEach((checkbox, index) => {
+                const saved = localStorage.getItem("django_day_" + index);
+                if (saved === "checked") {
+                    checkbox.checked = true;
+                    checkbox.closest("tr").classList.add("completed");
+                }
+
+                checkbox.addEventListener("change", function () {
+                    if (this.checked) {
+                        localStorage.setItem("django_day_" + index, "checked");
+                        this.closest("tr").classList.add("completed");
+                    } else {
+                        localStorage.removeItem("django_day_" + index);
+                        this.closest("tr").classList.remove("completed");
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
