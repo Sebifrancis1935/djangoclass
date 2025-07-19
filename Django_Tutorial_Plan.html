@@ -1,202 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Django 24-Day Course Plan</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #ecf0f3;
-            margin: 0;
-            padding: 30px 20px;
+<meta charset="UTF-8">
+<title>Django 24-Day Course Plan</title>
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #f5f7fa;
+        margin: 0;
+        padding: 30px 20px;
+        color: #333;
+    }
+
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 40px;
+        font-size: 2.8rem;
+        font-weight: 700;
+    }
+
+    .table-container {
+        max-width: 1000px;
+        margin: auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 18px 20px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+        background: #2c3e50;
+        color: white;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    tr {
+        background: #ffffff;
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+
+    tr:hover {
+        transform: scale(1.01);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .checkbox {
+        transform: scale(1.4);
+        cursor: pointer;
+        accent-color: #28a745;
+    }
+
+    .completed {
+        background: #28a745;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 0 15px #28a74580;
+    }
+
+    .details-container {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+    }
+
+    .details-container.show {
+        max-height: 300px;
+        opacity: 1;
+    }
+
+    .details-inner {
+        background: #f9f9f9;
+        margin: 10px 0;
+        padding: 20px;
+        border-left: 4px solid #3498db;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.97); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    ul li {
+        margin-bottom: 8px;
+        font-size: 16px;
+        color: #333;
+    }
+
+    /* Footer */
+    footer {
+        margin-top: 50px;
+        text-align: center;
+        font-size: 14px;
+        color: #555;
+        padding: 20px;
+        background: #f0f0f0;
+        border-top: 1px solid #ddd;
+    }
+
+    /* Mobile Responsive */
+    @media screen and (max-width: 768px) {
+        table, thead, tbody, th, td, tr {
+            display: block;
         }
 
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 40px;
-            font-size: 2.5em;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 2px #aaa;
+        th { display: none; }
+
+        tr {
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        .table-container {
-            max-width: 1000px;
-            margin: auto;
-            background: #f9f9f9;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        th,
         td {
-            padding: 16px 20px;
-            text-align: left;
+            padding: 12px;
+            border: none;
             border-bottom: 1px solid #eee;
         }
 
-        th {
-            background: #3498db;
-            color: white;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        td::before {
+            content: attr(data-label);
+            font-weight: bold;
+            color: #555;
+            display: block;
+            margin-bottom: 6px;
         }
-
-        tr {
-            transition: background-color 0.4s ease, transform 0.2s ease;
-        }
-
-        tr:hover {
-            background-color: #f0f8ff;
-            transform: scale(1.01);
-        }
-
-        .completed {
-            background-color: #d4edda !important;
-            box-shadow: inset 0 0 5px #28a74566;
-            transition: background-color 0.4s ease;
-        }
-
-        .checkbox {
-            transform: scale(1.3);
-            cursor: pointer;
-            accent-color: #28a745;
-            transition: transform 0.2s ease;
-        }
-
-        .checkbox:hover {
-            transform: scale(1.5);
-        }
-
-        /* Mobile View */
-        @media screen and (max-width: 768px) {
-
-            table,
-            thead,
-            tbody,
-            th,
-            td,
-            tr {
-                display: block;
-            }
-
-            tr {
-                background: #fff;
-                margin-bottom: 15px;
-                border-radius: 10px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            }
-
-            th {
-                display: none;
-            }
-
-            td {
-                padding: 10px 15px;
-                position: relative;
-            }
-
-            td::before {
-                content: attr(data-label);
-                font-weight: bold;
-                color: #555;
-                display: block;
-                margin-bottom: 6px;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
-
 <body>
 
-    <h1>Django 24-Day Course Plan</h1>
+<h1>Django 24-Day Course Plan</h1>
 
-    <div class="table-container">
-        <table id="courseTable">
-            <thead>
-                <tr>
-                    <th>Day</th>
-                    <th>Topic</th>
-                    <th>Completed</th>
-                </tr>
-            </thead>
-            <tbody>
-                <script>
-                    const topics = [
-                        "Introduction to Django and Web Development",
-                        "Setting up Django Project & Environment",
-                        "Creating Apps and Project Structure",
-                        "URL Dispatcher and Views",
-                        "Templates and Static Files",
-                        "Working with Models and Databases",
-                        "Django Admin Panel",
-                        "CRUD Operations: Create",
-                        "CRUD Operations: Read",
-                        "CRUD Operations: Update",
-                        "CRUD Operations: Delete",
-                        "Form Handling and Validation",
-                        "User Registration",
-                        "User Login and Logout",
-                        "Session and Authentication",
-                        "Restricting Views (Login Required)",
-                        "Class-Based Views Introduction",
-                        "Class-Based Views for CRUD",
-                        "Styling with Bootstrap",
-                        "Template Inheritance and Context",
-                        "Project Setup: Mini Project",
-                        "Building the Mini Project: Phase 1",
-                        "Building the Mini Project: Phase 2",
-                        "Testing, Debugging & Final Touches"
-                    ];
+<div class="table-container">
+    <table id="courseTable">
+        <thead>
+        <tr>
+            <th>Day</th>
+            <th>Topic</th>
+            <th>Completed</th>
+        </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+</div>
 
-                    for (let i = 0; i < topics.length; i++) {
-                        document.write(`
-              <tr>
-                <td data-label="Day">Day ${i + 1}</td>
-                <td data-label="Topic">${topics[i]}</td>
-                <td data-label="Completed"><input type="checkbox" class="checkbox" data-index="${i}"></td>
-              </tr>
-            `);
-                    }
-                </script>
-            </tbody>
-        </table>
-    </div>
+<footer>
+    &copy; 2025 Django Class Roadmap | Sebi Francis
+</footer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const checkboxes = document.querySelectorAll(".checkbox");
+<script>
+const topics = [
+    {
+        day: "Introduction to Django and Web Development",
+        points: ["What is Django?", "MVT Architecture", "Tools: VS Code, Git"]
+    },
+    {
+        day: "Setting up Django Project & Environment",
+        points: ["Virtual Environment", "django-admin startproject", "Runserver, project structure"]
+    },
+    {
+        day: "Creating Apps and Project Structure",
+        points: ["startapp", "Register in settings.py", "Anatomy of an app"]
+    },
+    {
+        day: "URL Dispatcher and Views",
+        points: ["Function-based views", "path() routing", "Basic URL mapping"]
+    },
+    {
+        day: "Templates and Static Files",
+        points: ["render()", "Template structure", "CSS using static files"]
+    },
+    {
+        day: "Working with Models and Databases",
+        points: ["models.Model", "makemigrations & migrate", "Database setup"]
+    },
+    {
+        day: "Django Admin Panel",
+        points: ["Register models", "Superuser creation", "Admin customization"]
+    },
+    {
+        day: "CRUD Operations: Create",
+        points: ["Create forms", "Handle POST request", "Redirect after create"]
+    },
+    {
+        day: "CRUD Operations: Read",
+        points: ["ListView basics", "Querying database", "Displaying templates"]
+    },
+    {
+        day: "CRUD Operations: Update",
+        points: ["UpdateView usage", "Form pre-fill", "Save changes"]
+    },
+    {
+        day: "CRUD Operations: Delete",
+        points: ["DeleteView basics", "Confirmation page", "Redirect after delete"]
+    },
+    {
+        day: "Form Handling and Validation",
+        points: ["forms.ModelForm", "Form validation", "Custom validation"]
+    },
+    {
+        day: "User Registration",
+        points: ["UserCreationForm", "Save user", "Basic user management"]
+    },
+    {
+        day: "User Login and Logout",
+        points: ["LoginView, LogoutView", "Sessions and cookies", "Redirect after login"]
+    },
+    {
+        day: "Session and Authentication",
+        points: ["auth overview", "@login_required", "Restrict pages"]
+    },
+    {
+        day: "Restricting Views (Login Required)",
+        points: ["@login_required decorator", "Restrict CRUD actions", "Redirect flow"]
+    },
+    {
+        day: "Class-Based Views Introduction",
+        points: ["CBV basics", "ListView and DetailView", "CBV URLs"]
+    },
+    {
+        day: "Class-Based Views for CRUD",
+        points: ["CreateView, UpdateView", "DeleteView", "Success URLs"]
+    },
+    {
+        day: "Styling with Bootstrap",
+        points: ["Bootstrap integration", "Responsive layouts", "Form styling"]
+    },
+    {
+        day: "Template Inheritance and Context",
+        points: ["base.html setup", "{% block %}", "Passing context data"]
+    },
+    {
+        day: "Project Setup: Mini Project",
+        points: ["Choose project idea", "Setup project", "Define goals"]
+    },
+    {
+        day: "Building the Mini Project: Phase 1",
+        points: ["Models & Migrations", "CRUD views", "Basic navigation"]
+    },
+    {
+        day: "Building the Mini Project: Phase 2",
+        points: ["Authentication", "Template polish", "Finalize views"]
+    },
+    {
+        day: "Testing, Debugging & Final Touches",
+        points: ["Fix bugs", "UI improvements", "Deployment prep"]
+    }
+];
 
-            checkboxes.forEach((checkbox, index) => {
-                const saved = localStorage.getItem("django_day_" + index);
-                if (saved === "checked") {
-                    checkbox.checked = true;
-                    checkbox.closest("tr").classList.add("completed");
-                }
 
-                checkbox.addEventListener("change", function () {
-                    if (this.checked) {
-                        localStorage.setItem("django_day_" + index, "checked");
-                        this.closest("tr").classList.add("completed");
-                    } else {
-                        localStorage.removeItem("django_day_" + index);
-                        this.closest("tr").classList.remove("completed");
-                    }
-                });
-            });
+const tableBody = document.getElementById("tableBody");
+
+topics.forEach((item, i) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td data-label="Day">Day ${i + 1}</td>
+        <td data-label="Topic">${item.day}</td>
+        <td data-label="Completed"><input type="checkbox" class="checkbox" data-index="${i}"></td>
+    `;
+
+    const detailRow = document.createElement("tr");
+    detailRow.innerHTML = `
+        <td colspan="3">
+            <div class="details-container" id="details-${i}">
+                <div class="details-inner">
+                    <ul>${item.points.map(p => `<li>${p}</li>`).join('')}</ul>
+                </div>
+            </div>
+        </td>
+    `;
+
+    tableBody.appendChild(row);
+    tableBody.appendChild(detailRow);
+
+    row.addEventListener("click", function (e) {
+        if (e.target.tagName.toLowerCase() === "input") return;
+        document.getElementById(`details-${i}`).classList.toggle("show");
+    });
+});
+
+// Local storage
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".checkbox").forEach((checkbox, index) => {
+        const saved = localStorage.getItem("django_day_" + index);
+        if (saved === "checked") {
+            checkbox.checked = true;
+            checkbox.closest("tr").classList.add("completed");
+        }
+        checkbox.addEventListener("change", function () {
+            if (this.checked) {
+                localStorage.setItem("django_day_" + index, "checked");
+                this.closest("tr").classList.add("completed");
+            } else {
+                localStorage.removeItem("django_day_" + index);
+                this.closest("tr").classList.remove("completed");
+            }
         });
-    </script>
+    });
+});
+</script>
 
 </body>
-
 </html>
